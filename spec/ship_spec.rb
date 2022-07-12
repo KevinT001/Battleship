@@ -5,6 +5,7 @@ RSpec.describe Ship do
   cruiser = Ship.new("Cruiser", 3)
 
   it 'exists' do
+
     expect(cruiser).to be_a(Ship)
   end
 
@@ -20,11 +21,16 @@ RSpec.describe Ship do
     expect(cruiser.health).to eq(3)
   end
 
-  it 'health can get damaged with a hit' do
-    cruiser.hit
-    expect(cruiser.health).to eq(2)
-    cruiser.hit
-    expect(cruiser.health).to eq(1)
+  it 'can tell if sunk?' do
+    expect(cruiser.sunk?).to eq(false)
   end
 
+  it 'can be hit' do
+    cruiser.hit
+    expect(cruiser.health).to eq(2)
+    expect(cruiser.sunk?).to eq(false)
+    cruiser.hit
+    cruiser.hit
+    expect(cruiser.sunk?).to eq(true)
+  end 
 end
