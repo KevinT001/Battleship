@@ -22,4 +22,21 @@ RSpec.describe Cell do
     expect(cell.empty?).to eq(true)
   end
 
+  it 'can place ship on cell' do
+    cruiser = Ship.new("Cruiser", 3)
+
+    cell.place_ship(cruiser)
+    expect(cell.ship).to eq(cruiser)
+    expect(cell.empty?). to eq(false)
+  end
+
+  it 'can see if cell is fired upon' do
+    expect(cell.fired_upon?).to eq(false)
+  end
+
+  it 'can fire upon a cell' do
+    cell.fire_upon
+    expect(cell.ship.health).to eq(2)
+    expect(cell.fired_upon?).to eq(true)
+  end 
 end
