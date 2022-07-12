@@ -1,4 +1,20 @@
 class Ship
+<<<<<<< feat_Kyongnam_ship
+  attr_reader :name, :length, :health, :hit
+    def initialize(name, length)
+      @name = name
+      @length = length
+      @health = length
+
+    end
+
+    def hit
+      @health -= 1
+
+
+
+
+=======
 attr_reader :name,
             :length,
             :health
@@ -16,4 +32,5 @@ attr_reader :name,
   def hit
     @health -= 1
   end 
+>>>>>>> main
 end
