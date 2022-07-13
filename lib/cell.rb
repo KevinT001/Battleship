@@ -1,4 +1,5 @@
 require 'ship'
+require 'pry'
 
 class Cell
   attr_reader :coordinate,
@@ -23,15 +24,16 @@ class Cell
     end
 
     def fired_upon?
-      if @length != @health
-        return true
-      else
+      if @ship.health == @ship.length
         return false
+      else
+        return true
       end
     end
 
     def fire_upon
-      @health
+      @ship.hit
+
 
     end
 
