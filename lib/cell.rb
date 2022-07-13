@@ -20,6 +20,11 @@ class Cell
     @fired_upon
   end
 
-  
+  def fire_upon
+    if !empty?
+      @ship.hit unless @fired_upon == true
+    end
+    @fired_upon = true
+  end 
 
 end

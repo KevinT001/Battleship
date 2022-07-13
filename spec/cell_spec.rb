@@ -34,7 +34,7 @@ RSpec.describe Cell do
     expect(@cell.fired_upon?).to eq(false)
   end
 
-  xit 'can fire upon a cell' do
+  it 'can fire upon a cell' do
     @cell.fire_upon
     expect(@cell.ship.health).to eq(2)
     expect(@cell.fired_upon?).to eq(true)
