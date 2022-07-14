@@ -3,7 +3,7 @@ require 'ship'
 class Cell
   attr_reader :coordinate,
               :ship
-  
+
   def initialize(coordinate)
     @coordinate = coordinate.to_s
     @ship = nil
@@ -28,5 +28,10 @@ class Cell
       @ship.hit unless @fired_upon == true
     end
     @fired_upon = true
-  end 
+  end
+
+  def render
+    if @coordinate == empty?
+    puts "."
+    if @coordinate ==  
 end
