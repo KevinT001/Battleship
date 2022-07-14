@@ -4,12 +4,11 @@ require 'pry'
 class Cell
   attr_reader :coordinate,
               :ship
-
+  
   def initialize(coordinate)
     @coordinate = coordinate.to_s
     @ship = nil
     @fired_upon = false
-
   end
 
   def empty?
@@ -39,5 +38,5 @@ class Cell
     else
     "H"
     end
-  end
+  end 
 end
