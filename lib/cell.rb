@@ -1,4 +1,5 @@
 require 'ship'
+require 'pry'
 
 class Cell
   attr_reader :coordinate,
@@ -8,7 +9,6 @@ class Cell
     @coordinate = coordinate.to_s
     @ship = nil
     @fired_upon = false
-
   end
 
   def empty?
@@ -28,5 +28,15 @@ class Cell
       @ship.hit unless @fired_upon == true
     end
     @fired_upon = true
+  end
+
+  def render
+    return "." unless fired_upon?
+    return "M" if empty?
+    if @ship.sunk?
+    "X"
+    else
+    "H"
+    end
   end 
 end
