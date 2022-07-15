@@ -11,11 +11,7 @@ class Cell
   end
 
   def empty?
-    if @ship == nil
-      true
-    elsif @ship != nil
-      false
-    end
+    @ship == nil 
   end
 
   def place_ship(boat)
@@ -34,7 +30,7 @@ class Cell
     if empty? == true 
       @fired_upon = true
     elsif empty? == false  
-      @fired_upon = true
+     @fired_upon = true
       @ship.hit
     end
   end
