@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+require 'ship'
+require 'pry'
+>>>>>>> main
 
 class Cell
   attr_reader :coordinate,
@@ -7,7 +12,6 @@ class Cell
     @coordinate = coordinate.to_s
     @ship = nil
     @fired_upon = false
-
   end
 
   def empty?
