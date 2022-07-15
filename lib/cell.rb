@@ -1,10 +1,8 @@
-require 'ship'
-require 'pry'
 
 class Cell
   attr_reader :coordinate,
               :ship
-  
+
   def initialize(coordinate)
     @coordinate = coordinate.to_s
     @ship = nil
@@ -20,23 +18,33 @@ class Cell
   end
 
   def fired_upon?
-    @fired_upon
+    if @fired_upon == false
+      false 
+    elsif @fired_upon == true 
+      true 
+    end
   end
 
   def fire_upon
-    if !empty?
-      @ship.hit unless @fired_upon == true
+    if empty? == true 
+      @fired_upon = true
+    elsif empty? == false  
+      @fired_upon = true
+      @ship.hit
     end
-    @fired_upon = true
   end
 
-  def render
-    return "." unless fired_upon?
-    return "M" if empty?
-    if @ship.sunk?
-    "X"
-    else
-    "H"
+  def render(visible = false)
+    if !empty? && @fired_upon == true && @ship.health == 0
+      "X"
+    elsif visible == true && !empty?
+      "S"
+    elsif @fired_upon == true && !empty? 
+      "H"
+    elsif  @fired_upon == true && empty? 
+      "M"
+    elsif @fired_upon == false
+      "."
     end
   end 
 end
