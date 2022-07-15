@@ -1,4 +1,3 @@
-require 'ship'
 
 class Cell
   attr_reader :coordinate,
@@ -12,7 +11,11 @@ class Cell
   end
 
   def empty?
-    @ship == nil
+    if @ship == nil
+      true
+    elsif @ship != nil
+      false
+    end
   end
 
   def place_ship(boat)
@@ -20,18 +23,33 @@ class Cell
   end
 
   def fired_upon?
-    @fired_upon
+    if @fired_upon == false
+      false 
+    elsif @fired_upon == true 
+      true 
+    end
   end
 
   def fire_upon
-    if !empty?
-      @ship.hit unless @fired_upon == true
+    if empty? == true 
+      @fired_upon = true
+    elsif empty? == false  
+      @fired_upon = true
+      @ship.hit
     end
-    @fired_upon = true
   end
 
-  def render
-    if @coordinate == empty?
-    puts "."
-    if @coordinate ==  
+  def render(visible = false)
+    if !empty? && @fired_upon == true && @ship.health == 0
+      "X"
+    elsif visible == true && !empty?
+      "S"
+    elsif @fired_upon == true && !empty? 
+      "H"
+    elsif  @fired_upon == true && empty? 
+      "M"
+    elsif @fired_upon == false
+      "."
+    end
+  end 
 end

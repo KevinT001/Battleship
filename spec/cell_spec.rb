@@ -66,6 +66,7 @@ RSpec.describe Cell do
     cruiser = Ship.new("Cruiser", 3)
     cell_2.place_ship(cruiser)
     cell_2.fire_upon
+    expect(cruiser.health).to eq(2)
     expect(cell_2.render).to eq("H")
     expect(cruiser.sunk?).to eq(false)
   end
@@ -74,9 +75,12 @@ RSpec.describe Cell do
     cell_2 = Cell.new("C3")
     cruiser = Ship.new("Cruiser", 3)
     cell_2.place_ship(cruiser)
-
+    cell_2.fire_upon
+    
     cruiser.hit
     cruiser.hit
+    
+    expect(cruiser.health).to eq(0)
     expect(cruiser.sunk?).to eq(true)
     expect(cell_2.render).to eq("X")
   end
