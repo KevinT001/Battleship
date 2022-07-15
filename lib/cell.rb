@@ -7,15 +7,10 @@ class Cell
     @coordinate = coordinate.to_s
     @ship = nil
     @fired_upon = false
-
   end
 
   def empty?
-    if @ship == nil
-      true
-    elsif @ship != nil
-      false
-    end
+    @ship == nil
   end
 
   def place_ship(boat)
