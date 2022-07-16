@@ -16,15 +16,15 @@ require './lib/board'
         expect(board.cells.size).to eq(16)
     end
         
-    xit 'can tell us if coordinate is on board or not' do 
+    it 'can tell us if coordinate is on board or not' do 
         expect(board.valid_coordinate?("A1")).to eq true
         expect(board.valid_coordinate?("D4")).to eq true
-        expect(board.valid_coordinate?("A5")).to eq true
-        expect(board.valid_coordinate?("AE")).to eq true
-        expect(board.valid_coordinate?("A22")).to eq true
+        expect(board.valid_coordinate?("A5")).to eq false
+        expect(board.valid_coordinate?("A3")).to eq true
+        expect(board.valid_coordinate?("A2")).to eq true
     end
 
-    xit 'can check number of coordinates in array = same length of ship' do 
+    it 'can check number of coordinates in array = same length of ship' do 
            
         expect(board.valid_placement?(cruiser,["A1", "A2"])).to eq false
         expect(board.valid_placement?(submarine,["A2", "A3", "A4"])).to eq false

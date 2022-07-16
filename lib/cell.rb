@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-require 'ship'
-require 'pry'
->>>>>>> main
 
 class Cell
   attr_reader :coordinate,
