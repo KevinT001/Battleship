@@ -36,25 +36,39 @@ class Board
           #for **each coordinate in the array of coordinates check if 
           #valid coordinate? and empty cell. 
           array_of_coordinates.each do |coordinate|
-            if valid_coordinate?(coordinate)&&@cells[coordinate].empty?
+            if valid_coordinate?(coordinate) && @cells[coordinate].empty? && check_consecutive_coordinate__placement && overlap?
                 # what does above do if true 
-
+                return true 
             else 
                 #if false what happens  puts "invalid placement"
+                #if invalid loop back to usesr input
             end
           end
         #condition 3
         #coordinates must be consecutive(is ship vertical&horizontal when placed) 
+        # can't go off the board 
+
+    end
+
+    def check_consecutive_coordinate__placement(array_of_coordinates)
           consecutive_coordinates = array_of_coordinates.each_con(2)
           consecutive_row = consecutive_coordinates.all? do |coordinate|
             coordinate[0][0] == coordinate[1][0]&& 
             coordinate[0][-1].to_i == coordinate[-1][-1].to_i  
           consecutive_column = consecutive_coordinates.all? do |coordinate|
-            coordinate[0][0] == coordinate[]
+            coordinate[0][0] == coordinate[0][-1] && [0][-1] == coordinate [-1][-1]
           end
-        # can't go off the board 
-
     end
+
+    def overlap? 
+    
+        end
+    end
+#if letters are the same then check if numbers are consecutive.
+#if numbers are the same then check if the letters are consecutive.
+
+
+
 
     def place_ship(boat, array_of_coordinates)
         if valid_placement?(boat, array_of_coordinates)
