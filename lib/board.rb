@@ -27,4 +27,47 @@ class Board
     end
 
 
+    def valid_placement?(boat, array_of_coordinates)
+        #condition 1
+        #coordinate count must equal ship.length
+            array_of_coordinates == ship.length 
+        #condition 2
+        #coordinate must exist and be empty.
+          #for **each coordinate in the array of coordinates check if 
+          #valid coordinate? and empty cell. 
+          array_of_coordinates.each do |coordinate|
+            if valid_coordinate?(coordinate)&&@cells[coordinate].empty?
+                # what does above do if true 
+
+            else 
+                #if false what happens  puts "invalid placement"
+            end
+          end
+        #condition 3
+        #coordinates must be consecutive(is ship vertical&horizontal when placed) 
+          consecutive_coordinates = array_of_coordinates.each_con(2)
+          consecutive_row = consecutive_coordinates.all? do |coordinate|
+            coordinate[0][0] == coordinate[1][0]&& 
+            coordinate[0][-1].to_i == coordinate[-1][-1].to_i  
+          consecutive_column = consecutive_coordinates.all? do |coordinate|
+            coordinate[0][0] == coordinate[]
+          end
+        # can't go off the board 
+
+    end
+
+    def place_ship(boat, array_of_coordinates)
+        if valid_placement?(boat, array_of_coordinates)
+            array_of_coordinates.each do |array_of_coordinate|
+                @cells[array_of_coordinate].place_ship(boat)
+            end
+        else
+            nil
+        end
+    end
+
+    def render
+        # 
+    end
+
 end 
