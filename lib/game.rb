@@ -14,8 +14,15 @@ class Game
     def initialize
         @player_board = Board.new 
         @cpu_board = Board.new 
-        @player
+        @player_sub = Ship.new("Submarine", 2)
+        @player_cruiser = Ship.new("Cruiser", 3)
+        @cpu_cruiser = Ship.new("Cruiser", 3)
+        @cpu_sub = Ship.new("Submarine", 2)
+        @message = Message.new
     end
+
+    
+
 
 
 
