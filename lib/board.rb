@@ -1,4 +1,5 @@
 class Board
+
     attr_reader :cells
 
     def initialize
@@ -81,3 +82,6 @@ class Board
     end
 end
  
+
+
+

@@ -29,7 +29,7 @@ class Cell
     if empty? == true 
       @fired_upon = true
     elsif empty? == false  
-     @fired_upon = true
+      @fired_upon = true
       @ship.hit
     end
   end
