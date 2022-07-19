@@ -25,9 +25,11 @@ require './lib/board'
     end
 
     
-    xit 'can check number of coordinates in array = same length of ship' do 
+    it 'can check number of coordinates in array = same length of ship' do 
            
+
         expect(board.valid_placement?(cruiser,["A1", "A2"])).to eq false
+        require 'pry'; binding.pry
         expect(board.valid_placement?(submarine,["A2", "A3", "A4"])).to eq false
     end 
 

@@ -27,48 +27,38 @@ class Board
     end
 
 
-    def valid_placement?(boat, array_of_coordinates)
+    def valid_placement?(boat, user_coordinates)
         #condition 1
         #coordinate count must equal ship.length
-            array_of_coordinates == ship.length 
+        user_coordinates == ship.length 
         #condition 2
         #coordinate must exist and be empty.
           #for **each coordinate in the array of coordinates check if 
           #valid coordinate? and empty cell. 
-          array_of_coordinates.each do |coordinate|
-            if valid_coordinate?(coordinate) && @cells[coordinate].empty? && check_consecutive_coordinate__placement && overlap?
-                # what does above do if true 
-                return true 
-            else 
-                #if false what happens  puts "invalid placement"
-                #if invalid loop back to usesr input
-            end
-          end
-        #condition 3
-        #coordinates must be consecutive(is ship vertical&horizontal when placed) 
-        # can't go off the board 
-
-    end
-
-    def check_consecutive_coordinate__placement(array_of_coordinates)
-          consecutive_coordinates = array_of_coordinates.each_con(2)
-          consecutive_row = consecutive_coordinates.all? do |coordinate|
-            coordinate[0][0] == coordinate[1][0]&& 
-            coordinate[0][-1].to_i == coordinate[-1][-1].to_i  
-          consecutive_column = consecutive_coordinates.all? do |coordinate|
-            coordinate[0][0] == coordinate[0][-1] && [0][-1] == coordinate [-1][-1]
+        user_coordinates.each do |coordinate|
+          if valid_coordinate?(coordinate) && @cells[coordinate].empty? && valid_horizontal_and_placement(user_coordinates)
+             return true 
+          else 
+             false
           end
     end
 
-    def overlap? 
-    
+    def valid_horizontal_and_placement(user_coordinates)
+        letters = []
+        numbers = [] 
+        user_coordinates.each do |coordinate|
+            letters<< coordinate[0]
+            numbers << coordinate[1]
+        end 
+        
+
+        if letters.uniq.count == 1 &&(numbers.min..numbers.max).to_a == numbers
+            true
+        elsif numbers.uniq.size == 1 &&(letters.min..letters.max).to_a == letters
+            true 
         end
+
     end
-#if letters are the same then check if numbers are consecutive.
-#if numbers are the same then check if the letters are consecutive.
-
-
-
 
     def place_ship(boat, array_of_coordinates)
         if valid_placement?(boat, array_of_coordinates)
