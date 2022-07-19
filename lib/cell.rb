@@ -4,7 +4,7 @@ class Cell
               :ship
 
   def initialize(coordinate)
-    @coordinate = coordinate.to_s
+    @coordinate = coordinate
     @ship = nil
     @fired_upon = false
   end

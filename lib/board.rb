@@ -18,7 +18,7 @@ class Board
             "D1"=> Cell.new("D1"),
             "D2"=> Cell.new("D2"),
             "D3"=> Cell.new("D3"),
-            "D4"=> Cell.new("D4")
+            "D4"=> Cell.new("D4"),
         }
     end
 
@@ -27,36 +27,32 @@ class Board
     end
 
 
-    def valid_placement?(boat, user_coordinates)
+    def valid_placement?(ship, coordinates)
         #condition 1
         #coordinate count must equal ship.length
-         user_coordinates == ship.length 
         #condition 2
         #coordinate must exist and be empty.
           #for **each coordinate in the array of coordinates check if 
           #valid coordinate? and empty cell. 
-          if valid_coordinate?(coordinate) && @cells[coordinate].empty? && valid_horizontal_and_placement(user_coordinates)
-             return true 
-          else 
-             false
-          end
-    end
-
-    def valid_horizontal_and_placement(user_coordinates)
-        letters = []
-        numbers = [] 
-        user_coordinates.each do |coordinate|
-            letters<< coordinate[0]
-            numbers << coordinate[1]
-        end 
-        
-
-        if letters.uniq.count == 1 &&(numbers.min..numbers.max).to_a == numbers
-            true
-        elsif numbers.uniq.size == 1 &&(letters.min..letters.max).to_a == letters
-            true 
+      
+        letters = coordinates.map { |letter| letter[0] }
+        numbers = coordinates.map { |number| number[1] }
+        not_vacant = coordinates.map { |piece| @cells[piece].empty? }
+        if ship.length != coordinates.count
+          false
+        elsif not_vacant.include?(false) == true
+          false
+        elsif letters.uniq.count == 1 && (numbers.min..numbers.max).to_a == numbers
+          true #above checks for horizontal
+        elsif (letters.min..letters.max).to_a == letters && numbers.uniq.count == 1
+          true #above checks for valid verticle
+        elsif (letters.min..letters.max).to_a == letters && (numbers.min..numbers.max).to_a == numbers
+          false #diagonal above 
+        elsif letters.uniq.length == 1 && numbers.uniq.length == numbers
+          false
+        else
+          false
         end
-
     end
 
     def place_ship(boat, array_of_coordinates)
