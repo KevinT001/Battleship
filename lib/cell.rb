@@ -4,13 +4,13 @@ class Cell
               :ship
 
   def initialize(coordinate)
-    @coordinate = coordinate.to_s
+    @coordinate = coordinate
     @ship = nil
     @fired_upon = false
   end
 
   def empty?
-    @ship == nil
+    @ship == nil 
   end
 
   def place_ship(boat)
