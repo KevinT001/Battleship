@@ -38,7 +38,4 @@ class Message
     def loser
         puts "You can't beat a dumb computer🤖... Loser👎"
     end
-
-
-
 end
