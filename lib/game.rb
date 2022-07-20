@@ -94,7 +94,7 @@ class Game
         if @cpu_board.valid_coordinate?(player_shot)
         if @cpu_board.cells["#{player_shot}"].fired_upon?
             puts "You cannot fire upon the same cell twice."
-            player_turn
+
         else
             @cpu_board.cells["#{player_shot}"].fire_upon
             if @cpu_board.cells["#{player_shot}"].render == "X"
@@ -124,7 +124,6 @@ class Game
 
         computer_shot = @player_board.cells.to_a.sample(1).flatten[0]
         duplicate_shot = @player_board.cells["#{computer_shot}"].render != "."
-        if !duplicate_shot
         @player_board.cells["#{computer_shot}"].fire_upon
         if @player_board.cells["#{computer_shot}"].render == "X"
             puts "The computer sunk your #{@player_board.cells["#{computer_shot}"].ship.name}!"
@@ -138,9 +137,9 @@ class Game
         elsif @player_board.cells["#{computer_shot}"].render == "M"
             puts "The computer's shot on #{computer_shot} was a miss."
         end
-        else
-        computer_turn
-        end
+
+
+        
 
         puts message.computer_board
         puts @cpu_board.render(false)
