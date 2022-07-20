@@ -39,8 +39,6 @@ class Game
         message.player_sub_placement
         player_place_sub
         comp_player_turn_loop
-
-
     end
 
     def whole_board_render
@@ -77,7 +75,6 @@ class Game
          user_coords = gets.chomp.upcase.split(" ")
          if @player_board.valid_placement?(@player_sub,user_coords) == true
              @player_board.place_ship(@player_sub, user_coords)
-
              whole_board_render
              is_valid_coordinates == true
              break
@@ -93,7 +90,6 @@ class Game
             start = rand(coordinates.size)
             length = boat.length
             valid_coordinates = coordinates.slice(start, length)
-
         end
         valid_coordinates
     end
@@ -106,10 +102,7 @@ class Game
       if @cpu_board.cells["#{player_shot}"].fired_upon?
           player_shot
           puts "You cannot fire upon the same cell twice. You lose a turn"
-
-
       else
-
           @cpu_board.cells["#{player_shot}"].fire_upon
           if @cpu_board.cells["#{player_shot}"].render == "X"
           puts "You sunk a #{@cpu_board.cells["#{player_shot}"].ship.name}!"
@@ -120,7 +113,6 @@ class Game
                   @player_board = Board.new
                   @cpu_ships = @player_ships = 2
                   run
-
               end
           elsif @cpu_board.cells["#{player_shot}"].render == "H"
           puts "Your shot on #{player_shot} was a hit!"
@@ -133,7 +125,6 @@ class Game
       player_shot
       end
       whole_board_render
-
       computer_shot = @player_board.cells.to_a.sample(1).flatten[0]
       duplicate_shot = @player_board.cells["#{computer_shot}"].render != "."
       @player_board.cells["#{computer_shot}"].fire_upon
@@ -156,35 +147,3 @@ class Game
     end
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-    # create computer board
-    #create player board
-    # build game menu - welcome message, user input if they want to play or quit. (what if they quit, what happens?)
-    # if play then computer must place ships
-    #user prompted to place cruiser then place sub
-    #display message of ships have been placed.
-
-    #Player prompted to enter coordinates to shoot
-    #player shoots and renders board(CPU?)(check if game is over?/all ships sunk)
-    # computer shoots. checks if game over? render player board
-    #loop above steps until cpu OR  player ships = sunk
-    #display message of winner.
-    #loop back to game menu
-
-    #message class? Need player info and cpu.
-
-
-
-
-# methods

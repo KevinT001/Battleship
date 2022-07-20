@@ -1,8 +1,6 @@
 require './lib/cell'
 class Board
-
     attr_reader :cells
-
     def initialize
         @cells = {
             "A1"=> Cell.new("A1"),
@@ -28,15 +26,7 @@ class Board
         @cells.keys.any?(coordinate)
     end
 
-
     def valid_placement?(ship, coordinates)
-        #condition 1
-        #coordinate count must equal ship.length
-        #condition 2
-        #coordinate must exist and be empty.
-          #for **each coordinate in the array of coordinates check if 
-          #valid coordinate? and empty cell. 
-      
         letters = coordinates.map { |letter| letter[0] }
         numbers = coordinates.map { |number| number[1] }
         not_vacant = coordinates.map { |piece| @cells[piece].empty? }
@@ -49,7 +39,7 @@ class Board
         elsif (letters.min..letters.max).to_a == letters && numbers.uniq.count == 1
           true #above checks for valid verticle
         elsif (letters.min..letters.max).to_a == letters && (numbers.min..numbers.max).to_a == numbers
-          false #diagonal above 
+          false #diagonal above
         elsif letters.uniq.length == 1 && numbers.uniq.length == numbers
           false
         else
@@ -68,21 +58,16 @@ class Board
     end
 
     def render(visible_ship = false)
-
         if visible_ship == false
              puts "  1 2 3 4\nA #{cells["A1"].render} #{cells["A2"].render} #{cells["A3"].render} #{cells["A4"].render}\n" +
                 "B #{cells["B1"].render} #{cells["B2"].render} #{cells["B3"].render} #{cells["B4"].render}\n" +
                 "C #{cells["C1"].render} #{cells["C2"].render} #{cells["C3"].render} #{cells["C4"].render}\n" +
                 "D #{cells["D1"].render} #{cells["D2"].render} #{cells["D3"].render} #{cells["D4"].render}"
         else
-            puts "  1 2 3 4\nA #{cells["A1"].render(true)} #{cells["A2"].render(true)} #{cells["A3"].render(true)} #{cells["A4"].render(true)}\n" + 
+            puts "  1 2 3 4\nA #{cells["A1"].render(true)} #{cells["A2"].render(true)} #{cells["A3"].render(true)} #{cells["A4"].render(true)}\n" +
                 "B #{cells["B1"].render(true)} #{cells["B2"].render(true)} #{cells["B3"].render(true)} #{cells["B4"].render(true)}\n" +
                 "C #{cells["C1"].render(true)} #{cells["C2"].render(true)} #{cells["C3"].render(true)} #{cells["C4"].render(true)}\n" +
-                "D #{cells["D1"].render(true)} #{cells["D2"].render(true)} #{cells["D3"].render(true)} #{cells["D4"].render(true)}" 
-        end 
+                "D #{cells["D1"].render(true)} #{cells["D2"].render(true)} #{cells["D3"].render(true)} #{cells["D4"].render(true)}"
+        end
     end
 end
- 
-
-
-
