@@ -1,17 +1,9 @@
 
 class Message
 
-    def welcome 
+    def welcome
         puts "Welcome to Battleship"
         puts "Enter any key to play. Enter q to quit."
-    end
-
-    def computer_board
-       "========COMPUTER BOARD========"
-    end
-
-    def player_board 
-        "========PLAYER BOARD========"
     end
 
     def cpu_ship_placment
@@ -27,7 +19,7 @@ class Message
         puts "Enter the squares for the Submarine (2 spaces)."
     end
 
-    def player_cruiser_placement 
+    def player_cruiser_placement
         puts "Enter the squares for the Cruiser (3 spaces)."
     end
 
@@ -46,7 +38,4 @@ class Message
     def loser
         puts "You can't beat a dumb computer🤖... Loser👎"
     end
-
-
-
 end

@@ -2,7 +2,6 @@
 class Cell
   attr_reader :coordinate,
               :ship
-
   def initialize(coordinate)
     @coordinate = coordinate
     @ship = nil
@@ -19,16 +18,16 @@ class Cell
 
   def fired_upon?
     if @fired_upon == false
-      false 
-    elsif @fired_upon == true 
-      true 
+      false
+    elsif @fired_upon == true
+      true
     end
   end
 
   def fire_upon
-    if empty? == true 
+    if empty? == true
       @fired_upon = true
-    elsif empty? == false  
+    elsif empty? == false
       @fired_upon = true
       @ship.hit
     end
@@ -39,12 +38,12 @@ class Cell
       "X"
     elsif visible == true && !empty?
       "S"
-    elsif @fired_upon == true && !empty? 
+    elsif @fired_upon == true && !empty?
       "H"
-    elsif  @fired_upon == true && empty? 
+    elsif  @fired_upon == true && empty?
       "M"
     elsif @fired_upon == false
       "."
     end
-  end 
+  end
 end

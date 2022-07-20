@@ -5,7 +5,6 @@ RSpec.describe Ship do
   cruiser = Ship.new("Cruiser", 3)
 
   it 'exists' do
-
     expect(cruiser).to be_a(Ship)
   end
 
@@ -32,5 +31,5 @@ RSpec.describe Ship do
     cruiser.hit
     cruiser.hit
     expect(cruiser.sunk?).to eq(true)
-  end 
+  end
 end
