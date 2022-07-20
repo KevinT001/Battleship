@@ -3,7 +3,7 @@ class Message
 
     def welcome 
         puts "Welcome to Battleship"
-        puts "Enter p to play. Enter q to quit."
+        puts "Enter any key to play. Enter q to quit."
     end
 
     def computer_board
@@ -35,28 +35,12 @@ class Message
         puts "Invalid coordinates. Please enter again."
     end
 
-    def player_shot(cell)
-        if cell.render == "H"
-            puts "Hit"
-        else
-            puts "Your shot missed"
-        end
-    end
-
-    def computer_shot(cell)
-        if cell.render == "H"
-            puts "Computer shot hit"
-        else
-            puts "Computer missed"
-        end
+    def player_shoots
+        puts "Enter the coordinate for your shot:"
     end
 
     def winner
-        if #player wins
-            puts "You won!"
-        else #computer wins (all player ships sunk)
-            "You lose!"
-        end
+        puts "Congratulations! You Won!"
     end
 
 

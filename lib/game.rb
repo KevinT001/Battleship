@@ -19,6 +19,8 @@ class Game
         @cpu_cruiser = Ship.new("Cruiser", 3)
         @cpu_sub = Ship.new("Submarine", 2)
         @message = Message.new
+        @cpu_ships = 2
+        @player_ships = 2
     end
 
     def run 
@@ -56,7 +58,7 @@ class Game
             else puts message.invalid_coordinates 
             end 
         end
-        sleep(1)
+        
         puts message.computer_board
         puts @cpu_board.render(false)
          puts message.player_board
@@ -68,24 +70,62 @@ class Game
             user_coords = gets.chomp.upcase.split(" ")
             if @player_board.valid_placement?(@player_sub,user_coords) == true 
                 @player_board.place_ship(@player_sub, user_coords)
-                sleep(1)
+                
                 puts message.computer_board
                 puts @cpu_board.render(false)
                 puts message.player_board
-                @player_board.render(true)
+                puts@player_board.render(true)
                 is_valid_coordinates == true 
                 break
             else puts message.invalid_coordinates 
             end
-            
-         end
+        end 
+
+          #player turn to shoot
+        puts message.player_shoots
+        player_shot = gets.chomp.upcase.strip
+        if @cpu_board.valid_coordinate?(player_shot)
+        if @cpu_board.cells["#{player_shot}"].fired_upon?
+            puts "You cannot fire upon the same cell twice."
+            player_turn
+        else
+            @cpu_board.cells["#{player_shot}"].fire_upon
+            if @cpu_board.cells["#{player_shot}"].render == "X"
+            puts "You sunk a #{@cpu_board.cells["#{player_shot}"].ship.name}!"
+            @cpu_ships -= 1
+                if @cpu_ships == 0 
+                    puts message.winner
+                    run
+                end
+            elsif @cpu_board.cells["#{player_shot}"].render == "H"
+            puts "Your shot on #{player_shot} was a hit!"
+            elsif @cpu_board.cells["#{player_shot}"].render == "M"
+            puts "Your shot on #{player_shot} was a miss."
+            end
+        end
+        else
+        puts message.invalid_coordinates
+        player_turn
+        end
+    
+
+        puts message.computer_board
+        puts @cpu_board.render(false)
+        puts message.player_board
+        puts@player_board.render(true)
+        
 
         
 
 
-     
-      
+
     end 
+            
+        
+
+        
+
+
     
 
     def random_coordinates(boat, board)
@@ -116,6 +156,7 @@ end
     # if play then computer must place ships
     #user prompted to place cruiser then place sub 
     #display message of ships have been placed. 
+
     #Player prompted to enter coordinates to shoot 
     #player shoots and renders board(CPU?)(check if game is over?/all ships sunk)
     # computer shoots. checks if game over? render player board
