@@ -114,11 +114,6 @@ class Game
         puts message.player_board
         puts@player_board.render(true)
         
-
-        
-
-
-
     end 
             
         

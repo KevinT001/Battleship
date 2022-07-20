@@ -40,7 +40,11 @@ class Message
     end
 
     def winner
-        puts "Congratulations! You Won!"
+        puts "Congratulations! You Won!🥳"
+    end
+
+    def loser
+        puts "You can't beat a dumb computer🤖... Loser👎"
     end
 
 
