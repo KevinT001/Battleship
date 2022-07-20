@@ -61,9 +61,9 @@ class Game
 
         puts message.computer_board
         puts @cpu_board.render(false)
-         puts message.player_board
-         puts @player_board.render(true)
-         puts message.player_sub_placement
+        puts message.player_board
+        puts @player_board.render(true)
+        puts message.player_sub_placement
 
          is_valid_coordinates = false
          while is_valid_coordinates == false do
