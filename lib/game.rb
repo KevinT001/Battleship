@@ -93,16 +93,22 @@ class Game
         player_shot = gets.chomp.upcase.strip
         if @cpu_board.valid_coordinate?(player_shot)
         if @cpu_board.cells["#{player_shot}"].fired_upon?
+            player_shot
             puts "You cannot fire upon the same cell twice."
+
 
         else
             @cpu_board.cells["#{player_shot}"].fire_upon
             if @cpu_board.cells["#{player_shot}"].render == "X"
             puts "You sunk a #{@cpu_board.cells["#{player_shot}"].ship.name}!"
             @cpu_ships -= 1
-                if @cpu_ships == 0
+                if  @cpu_ships == 0
                     puts message.winner
+                    @cpu_board = Board.new
+                    @player_board = Board.new
+                    @cpu_ships = @player_ships = 2
                     run
+
                 end
             elsif @cpu_board.cells["#{player_shot}"].render == "H"
             puts "Your shot on #{player_shot} was a hit!"
@@ -112,7 +118,7 @@ class Game
         end
         else
         puts message.invalid_coordinates
-        player_turn
+        player_shot
         end
 
 
@@ -130,7 +136,11 @@ class Game
             @player_ships -= 1
                 if @player_ships == 0
                     puts message.loser
+                    @cpu_board = Board.new
+                    @player_board = Board.new
+                    @cpu_ships = @player_ships = 2
                     run
+
                 end
         elsif @player_board.cells["#{computer_shot}"].render == "H"
             puts "The computer's shot on #{computer_shot} was a hit."
@@ -139,7 +149,7 @@ class Game
         end
 
 
-        
+
 
         puts message.computer_board
         puts @cpu_board.render(false)
