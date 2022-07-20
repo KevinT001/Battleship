@@ -81,7 +81,14 @@ class Game
             end
         end
 
+
           #player turn to shoot
+          #if a computer cruiser is not sunk?
+          #if a computer sub is not sunk?
+          #if our cruiser is not sunk?
+          #if our sub is not sunk?
+
+        until @cpu_ships == 0 || @player_ships == 0
         puts message.player_shoots
         player_shot = gets.chomp.upcase.strip
         if @cpu_board.valid_coordinate?(player_shot)
@@ -111,8 +118,9 @@ class Game
 
         puts message.computer_board
         puts @cpu_board.render(false)
+
         puts message.player_board
-        puts@player_board.render(true)
+        puts @player_board.render(true)
 
         computer_shot = @player_board.cells.to_a.sample(1).flatten[0]
         duplicate_shot = @player_board.cells["#{computer_shot}"].render != "."
@@ -137,8 +145,8 @@ class Game
         puts message.computer_board
         puts @cpu_board.render(false)
         puts message.player_board
-        puts@player_board.render(true)
-
+        puts @player_board.render(true)
+      end
     end
 
 
