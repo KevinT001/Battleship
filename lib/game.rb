@@ -23,19 +23,68 @@ class Game
 
     def run 
         puts message.welcome
-        user_input = gets.chomp 
+        user_input = gets.chomp.downcase 
          if user_input == "q"
             exit 
          end
         
         coordinates = random_coordinates(@cpu_cruiser, @cpu_board)
+        coordinates2 = random_coordinates(@cpu_sub, @cpu_board)
         @cpu_board.place_ship(@cpu_cruiser,coordinates)
-        puts @cpu_board.render(true)
-         #place cpu sub
-         #ask user for input for their cruiser
-         #ask user for input for their sub
-         #line 33 for both boards to render them 
-         
+        @cpu_board.place_ship(@cpu_sub,coordinates2)
+        
+        # puts message.computer_board ( why does this not place sub ship?)
+        puts @cpu_board.render(false)
+        puts message.player_board
+        puts @player_board.render(false)
+        puts message.cpu_ship_placment
+        puts message.player_ship_placement
+        puts message.player_cruiser_placement
+    
+        
+        is_valid_coordinates = false
+         while is_valid_coordinates == false do 
+            user_coords = gets.chomp.upcase.split(" ")
+            if @player_board.valid_placement?(@player_cruiser,user_coords) == true 
+                @player_board.place_ship(@player_cruiser, user_coords)
+                puts message.computer_board
+                puts @cpu_board.render(false)
+                puts message.player_board
+                puts @player_board.render(true)
+                is_valid_coordinates == true
+                break
+            else puts message.invalid_coordinates 
+            end 
+        end
+        sleep(1)
+        puts message.computer_board
+        puts @cpu_board.render(false)
+         puts message.player_board
+         puts @player_board.render(true)
+         puts message.player_sub_placement
+
+         is_valid_coordinates = false
+         while is_valid_coordinates == false do 
+            user_coords = gets.chomp.upcase.split(" ")
+            if @player_board.valid_placement?(@player_sub,user_coords) == true 
+                @player_board.place_ship(@player_sub, user_coords)
+                sleep(1)
+                puts message.computer_board
+                puts @cpu_board.render(false)
+                puts message.player_board
+                @player_board.render(true)
+                is_valid_coordinates == true 
+                break
+            else puts message.invalid_coordinates 
+            end
+            
+         end
+
+        
+
+
+     
+      
     end 
     
 

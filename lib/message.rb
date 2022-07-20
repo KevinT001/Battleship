@@ -7,11 +7,11 @@ class Message
     end
 
     def computer_board
-       10.times {puts "="} + "COMPUTER BOARD" + 10.times {puts "="}
+       "========COMPUTER BOARD========"
     end
 
     def player_board 
-        10.times {puts "="} + "PLAYER BOARD" + 10.times {puts "="}
+        "========PLAYER BOARD========"
     end
 
     def cpu_ship_placment
@@ -20,7 +20,7 @@ class Message
 
     def player_ship_placement
         puts "You now need to lay out your two ships."
-        puts "The Cruiser is three units long and the Submarine is two unites long."
+        puts "The Cruiser is three units long and the Submarine is two units long."
     end
 
     def player_sub_placement
