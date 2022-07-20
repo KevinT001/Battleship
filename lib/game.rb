@@ -29,19 +29,11 @@ class Game
          if user_input == "q"
             exit
          end
-
-        coordinates = random_coordinates(@cpu_cruiser, @cpu_board)
-        coordinates2 = random_coordinates(@cpu_sub, @cpu_board)
-        cpu_board.place_ship(@cpu_cruiser,coordinates)
-        cpu_board.place_ship(@cpu_sub,coordinates2)
-
-        # puts message.computer_board ( why does this not place sub ship?)
-        puts cpu_board.render(false)
-        puts message.player_board
-        puts player_board.render(false)
-        puts message.cpu_ship_placment
-        puts message.player_ship_placement
-        puts message.player_cruiser_placement
+        cpu_place_ship
+        whole_board_render
+        message.cpu_ship_placment
+        message.player_ship_placement
+        message.player_cruiser_placement
 
 
         is_valid_coordinates = false
@@ -49,21 +41,21 @@ class Game
             user_coords = gets.chomp.upcase.split(" ")
             if player_board.valid_placement?(@player_cruiser,user_coords) == true
                 player_board.place_ship(@player_cruiser, user_coords)
-                puts message.computer_board
-                puts cpu_board.render(false)
-                puts message.player_board
-                puts player_board.render(true)
+                message.computer_board
+                cpu_board.render(false)
+                message.player_board
+                player_board.render(true)
                 is_valid_coordinates == true
                 break
-            else puts message.invalid_coordinates
+            else message.invalid_coordinates
             end
         end
 
-        puts message.computer_board
-        puts cpu_board.render(false)
-        puts message.player_board
-        puts player_board.render(true)
-        puts message.player_sub_placement
+        message.computer_board
+        cpu_board.render(false)
+        message.player_board
+        player_board.render(true)
+        message.player_sub_placement
 
          is_valid_coordinates = false
          while is_valid_coordinates == false do
@@ -71,13 +63,13 @@ class Game
             if player_board.valid_placement?(@player_sub,user_coords) == true
                 player_board.place_ship(@player_sub, user_coords)
 
-                puts message.computer_board
-                puts cpu_board.render(false)
-                puts message.player_board
-                puts player_board.render(true)
+                message.computer_board
+                cpu_board.render(false)
+                message.player_board
+                player_board.render(true)
                 is_valid_coordinates == true
                 break
-            else puts message.invalid_coordinates
+            else message.invalid_coordinates
             end
         end
 
@@ -89,12 +81,12 @@ class Game
           #if our sub is not sunk?
 
         until @cpu_ships == 0 || @player_ships == 0
-        puts message.player_shoots
+        message.player_shoots
         player_shot = gets.chomp.upcase.strip
         if cpu_board.valid_coordinate?(player_shot)
         if cpu_board.cells["#{player_shot}"].fired_upon?
             player_shot
-            puts "You cannot fire upon the same cell twice."
+            puts "You cannot fire upon the same cell twice. You lose a turn"
 
 
         else
@@ -103,7 +95,7 @@ class Game
             puts "You sunk a #{@cpu_board.cells["#{player_shot}"].ship.name}!"
             cpu_ships -= 1
                 if  cpu_ships == 0
-                    puts message.winner
+                    message.winner
                     cpu_board = Board.new
                     player_board = Board.new
                     cpu_ships = player_ships = 2
@@ -117,16 +109,16 @@ class Game
             end
         end
         else
-        puts message.invalid_coordinates
+        message.invalid_coordinates
         player_shot
         end
 
 
-        puts message.computer_board
-        puts cpu_board.render(false)
+        message.computer_board
+        cpu_board.render(false)
 
-        puts message.player_board
-        puts player_board.render(true)
+        message.player_board
+        player_board.render(true)
 
         computer_shot = player_board.cells.to_a.sample(1).flatten[0]
         duplicate_shot = player_board.cells["#{computer_shot}"].render != "."
@@ -135,7 +127,7 @@ class Game
             puts "The computer sunk your #{@player_board.cells["#{computer_shot}"].ship.name}!"
             player_ships -= 1
                 if player_ships == 0
-                    puts message.loser
+                    message.loser
                     cpu_board = Board.new
                     player_board = Board.new
                     cpu_ships = player_ships = 2
@@ -151,14 +143,26 @@ class Game
 
 
 
-        puts message.computer_board
-        puts cpu_board.render(false)
-        puts message.player_board
-        puts player_board.render(true)
+        message.computer_board
+        cpu_board.render(false)
+        message.player_board
+        player_board.render(true)
       end
     end
 
+    def whole_board_render
+      puts "========COMPUTER BOARD========"
+      cpu_board.render(false)
+      puts "=========PLAYER BOARD========="
+      player_board.render(true)
+    end
 
+    def cpu_place_ship
+      coordinates = random_coordinates(@cpu_cruiser, @cpu_board)
+      coordinates2 = random_coordinates(@cpu_sub, @cpu_board)
+      cpu_board.place_ship(@cpu_cruiser,coordinates)
+      cpu_board.place_ship(@cpu_sub,coordinates2)
+    end
 
 
 
