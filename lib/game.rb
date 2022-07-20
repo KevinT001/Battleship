@@ -1,7 +1,7 @@
 require './lib/ship'
 require './lib/cell'
 require './lib/board'
-require './lib/game_messages'
+require './lib/message'
 class Game
     attr_reader :player_board,
                 :cpu_board,
@@ -21,7 +21,36 @@ class Game
         @message = Message.new
     end
 
+    def run 
+        puts message.welcome
+        user_input = gets.chomp 
+         if user_input == "q"
+            exit 
+         end
+        
+        coordinates = random_coordinates(@cpu_cruiser, @cpu_board)
+        @cpu_board.place_ship(@cpu_cruiser,coordinates)
+        puts @cpu_board.render(true)
+         #place cpu sub
+         #ask user for input for their cruiser
+         #ask user for input for their sub
+         #line 33 for both boards to render them 
+         
+    end 
     
+
+    def random_coordinates(boat, board)
+        valid_coordinates = [] 
+        until board.valid_placement?(boat, valid_coordinates) do 
+            coordinates = board.cells.keys
+            start = rand(coordinates.size)
+            length = boat.length
+            valid_coordinates = coordinates.slice(start, length) 
+            
+        end
+        valid_coordinates
+    end
+end 
 
 
 
@@ -47,9 +76,7 @@ class Game
 
     #message class? Need player info and cpu. 
 
-    def 
-        start
-    end
-end
+  
+
 
 # methods 

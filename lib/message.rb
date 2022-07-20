@@ -1,4 +1,4 @@
-require './lib/'
+
 class Message
 
     def welcome 
@@ -35,16 +35,16 @@ class Message
         puts "Invalid coordinates. Please enter again."
     end
 
-    def player_shot
-        if #cpu ship is hit
+    def player_shot(cell)
+        if cell.render == "H"
             puts "Hit"
         else
             puts "Your shot missed"
         end
     end
 
-    def computer_shot
-        if #cpu hits player ship
+    def computer_shot(cell)
+        if cell.render == "H"
             puts "Computer shot hit"
         else
             puts "Computer missed"
